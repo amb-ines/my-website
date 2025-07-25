@@ -1,10 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>My First Retro Webpage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DOMiGO Noticias y Transporte</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      color: #333;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    section {
+      padding: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card small {
+      color: gray;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .button {
+      display: inline-block;
+      background: #0077cc;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .directory {
+      margin-top: 2rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      .card, section {
+        padding: 0.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <p>Welcome to Ines's AWESOME first website!</p>
+
+<header>
+  <h1>🚌 DOMiGO Noticias & Transporte</h1>
+</header>
+
+<section>
+  <h2>🗞️ Últimas Noticias</h2>
+
+  <div class="card">
+    <h2>Julio 2025</h2>
+    <small>Publicado: 25/07/2025</small>
+    <p>✨ Nuevo: Mejoras en mapas y paradas<br>
+       🐞 Correcciones: Error al filtrar rutas por precio<br>
+       🔜 En agosto: Modo viaje (GPS tracking)</p>
+  </div>
+
+  <div class="card">
+    <h2>Junio 2025</h2>
+    <small>Publicado: 30/06/2025</small>
+    <p>🚀 Lanzamiento oficial DOMiGO v1.0<br>
+       🙌 ¡Gracias a todos los que descargaron!</p>
+  </div>
+
+  <a class="button" href="#">Suscribirse al boletín</a>
+</section>
+
+<section class="directory">
+  <h2>📍 Directorio de Operadores de Transporte</h2>
+
+  <div class="card">
+    <h2>OMSA (Santo Domingo)</h2>
+    <p>
+      🚌 Servicio: Bus público<br>
+      🌐 <a href="https://omsa.gob.do" target="_blank">omsa.gob.do</a><br>
+      ☎️ WhatsApp: N/D<br>
+      🎟️ Compra: Solo en persona
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Metro STGO</h2>
+    <p>
+      🚆 Servicio: Metro<br>
+      🌐 <a href="https://opret.gob.do" target="_blank">opret.gob.do</a><br>
+      ☎️ Tel: 809-123-4567<br>
+      🎟️ Compra: En taquillas
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Caribe Tours</h2>
+    <p>
+      🚌 Servicio: Interurbano privado<br>
+      🌐 <a href="https://caribetours.com.do" target="_blank">caribetours.com.do</a><br>
+      ☎️ WhatsApp: 809-555-1212<br>
+      🎟️ <a href="https://ventas.caribetours.com.do" target="_blank">Comprar en línea</a>
+    </p>
+  </div>
+</section>
+
 </body>
 </html>
