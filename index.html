@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
   <title>Novedades de DOMiGO</title>
   <style>
+    /* your CSS */
+  </style>
+</head>
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -65,26 +73,25 @@
       margin-top: 2rem;
     }
 
-    .highlight-quote {
+.highlight-quote {
   text-align: center;
-  margin: 50px auto 30px auto;
-  max-width: 800px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.8;
+  margin: 40px auto 20px auto;
+  max-width: 700px;               /* narrower for a cleaner block */
+  font-family: 'Dancing Script', cursive; 
+  font-size: 1.1rem;              /* smaller for neat fit */
+  line-height: 1.6;
   color: #009688; /* DOMiGO teal */
 }
 
 .highlight-quote p {
-  font-style: italic;
+  margin: 0;
 }
 
 .highlight-quote .signature {
   display: block;
-  margin-top: 10px;
-  font-family: 'Dancing Script', cursive; /* Fancy handwritten style */
-  font-size: 1.5rem;
-  color: #00695c; /* darker teal for emphasis */
+  margin-top: 6px;
+  font-size: 1.2rem;              /* just slightly larger for emphasis */
+  color: #00695c;                 /* darker teal */
 }
 
     /* Footer styles should be outside @media */
