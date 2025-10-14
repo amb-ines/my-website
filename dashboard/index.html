@@ -437,6 +437,13 @@ body.role-admin #actions .aud-municipality { display: list-item; }
   </main>
 
 <script>
+/* =========================
+   PUBLIC SITE MAIN PANEL (IIFE)
+   - Logged-out view: tabs, sidebar links, actions
+   - Renders content inside #main-panel
+   ========================= */
+(() => {
+	
 /* ===== DOM handles ===== */
 const panel = document.getElementById('main-panel');
 const homeHTML = panel.innerHTML; // original dashboard view (home)
@@ -1082,22 +1089,24 @@ document.querySelector('.chip')?.addEventListener('click', ()=>{
 renderSidebarForUser(currentUser);
 // arm Actions click handler
 bindActionsHandler();
+
+})(); // end PUBLIC SITE MAIN PANEL (IIFE)	
 </script>
 
 
 
 <footer class="site-footer">
-<p>© <span id="y"></span> Transit Solutions LLC — All rights reserved.</p>  <script>document.getElementById('y').textContent=new Date().getFullYear()</script> 
+<p>© <span id="y"></span> Domigo Transit Solutions LLC — All rights reserved.</p>  <script>document.getElementById('y').textContent=new Date().getFullYear()</script> 
 </footer>
 
 <script>
 /* =========================
-   MAIN DASHBOARD PANEL (IIFE #1)
+   AUTHENTICATED MAIN DASHBOARD PANEL (IIFE #2)
    - Handles logged-in user view, navigation tabs,
      and page rendering for Home / Tutorials / Settings
    ========================= */
-
 (() => {
+	
   // ---- Mini helpers / DOM refs ----
   const panel = document.getElementById('main-panel');
   if (!panel) return;
@@ -1375,6 +1384,7 @@ window.wirePanelLinks = function(root){
   });
 };
 
+})(); // end AUTH MAIN DASH PANEL (IIFE #2)		
 </script>
 </body>
 </html>
