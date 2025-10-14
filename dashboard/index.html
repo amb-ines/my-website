@@ -342,33 +342,35 @@ body.role-admin #actions .aud-municipality { display: list-item; }
           <div class="brand-sub" id="org-sub">Transit Solutions LLC</div>
         </div>
 
-<!-- About: visible only when logged OUT -->
-<section id="about-widget" class="anon-only">
-  <div class="side-widget" id="about-or-tasks">
-    <h4 id="about-or-tasks-title">About</h4>
-    <div id="about-or-tasks-body">
-      <p>We partner with carriers and cities to make service clearer, safer, and more reliable.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Actions: visible only when logged IN -->
+<!-- Actions Links: visible only when logged IN -->
 <nav id="actions" class="side-widget actions auth-only" aria-label="Actions">
   <h4>Actions</h4>
   <ul class="actions-list" id="actions-list">
+
     <!-- Transit / Operator -->
-    <li class="aud-operator"><a href="#tr-service" data-action="tr-service"><span class="sym"></span><span>Service Alerts</span></a></li>
-    <li class="aud-operator"><a href="#tr-intake"  data-action="tr-intake"><span class="sym"></span><span>Intake &amp; Triage</span></a></li>
-    <li class="aud-operator"><a href="#tr-safety"  data-action="tr-safety"><span class="sym"></span><span>Safety &amp; Accessibility</span></a></li>
-    <li class="aud-operator"><a href="#tr-account" data-action="tr-account"><span class="sym"></span><span>Accountability</span></a></li>
-    <li class="aud-operator"><a href="#tr-data"    data-action="tr-data"><span class="sym"></span><span>Data &amp; Analytics</span></a></li>
+    <li class="aud-operator"><a href="#tr-service" data-action="tr-service">
+	<span class="sym"></span><span>Service Alerts</span></a></li>
+    <li class="aud-operator"><a href="#tr-intake"  data-action="tr-intake">
+	<span class="sym"></span><span>Intake &amp; Triage</span></a></li>
+    <li class="aud-operator"><a href="#tr-safety"  data-action="tr-safety">
+	<span class="sym"></span><span>Safety &amp; Accessibility</span></a></li>
+    <li class="aud-operator"><a href="#tr-account" data-action="tr-account">
+	<span class="sym"></span><span>Accountability</span></a></li>
+    <li class="aud-operator"><a href="#tr-data"    data-action="tr-data">
+	<span class="sym"></span><span>Operator Analytics</span></a></li>
 
     <!-- City / Municipality -->
-    <li class="aud-municipality"><a href="#act-public" data-action="act-public"><span class="sym"></span><span>Public Notices</span></a></li>
-    <li class="aud-municipality"><a href="#act-safety" data-action="act-safety"><span class="sym"></span><span>Safety &amp; Accessibility</span></a></li>
-    <li class="aud-municipality"><a href="#act-city"   data-action="act-city"><span class="sym"></span><span>Compliance</span></a></li>
-    <li class="aud-municipality"><a href="#act-data"   data-action="act-data"><span class="sym"></span><span>Data &amp; Analytics</span></a></li>
-    <li class="aud-municipality"><a href="#act-road"   data-action="act-road"><span class="sym"></span><span>Roadway Events</span></a></li>
+    <li class="aud-municipality"><a href="#act-public" data-action="act-public">
+	<span class="sym"></span><span>Public Notices</span></a></li>
+    <li class="aud-municipality"><a href="#act-safety" data-action="act-safety">
+	<span class="sym"></span><span>Safety &amp; Accessibility</span></a></li>
+    <li class="aud-municipality"><a href="#act-city"   data-action="act-city">
+	<span class="sym"></span><span>Compliance</span></a></li>
+    <li class="aud-municipality"><a href="#act-data"   data-action="act-data">
+	<span class="sym"></span>span>Municipality Data</span></a></li>
+    <li class="aud-municipality"><a href="#act-road"   data-action="act-road">
+	<span class="sym"></span><span>Roadway Events</span></a></li>
+
   </ul>
 </nav>
 
@@ -669,11 +671,11 @@ const ACTIONS = {
     </section>
   `,
   "tr-data": `
-    <section class="contact-card">
-      <a href="#home" class="back-btn" data-tab="home">← Back</a>
-      <h2 style="margin-top:0">Data &amp; Analytics</h2>
-      <p>Hotspots, SLA trends, exports to CSV.</p>
-    </section>
+      <section class="contact-card">
+    <a href="#home" class="back-btn" data-tab="home">← Back</a>
+    <h2 style="margin-top:0">Operator Analytics</h2>
+    <p>Operator KPIs, hotspots, SLA trends, exports to CSV.</p>
+  </section>
   `,
   "act-public": `
     <section class="contact-card">
@@ -697,11 +699,11 @@ const ACTIONS = {
     </section>
   `,
   "act-data": `
-    <section class="contact-card">
-      <a href="#home" class="back-btn" data-tab="home">← Back</a>
-      <h2 style="margin-top:0">Data &amp; Analytics</h2>
-      <p>City-wide KPIs across operators and routes.</p>
-    </section>
+     <section class="contact-card">
+    <a href="#home" class="back-btn" data-tab="home">← Back</a>
+    <h2 style="margin-top:0">Municipality Data</h2>
+    <p>City-wide KPIs across operators and routes.</p>
+  </section>
   `,
   "act-road": `
     <section class="contact-card">
@@ -711,7 +713,6 @@ const ACTIONS = {
     </section>
   `
 };
-
 
 
 /* ====== Render helpers ====== */ 
