@@ -438,7 +438,7 @@ body.role-admin #actions .aud-municipality { display: list-item; }
 
 <script>
 /* =========================
-   PUBLIC SITE MAIN PANEL (IIFE)
+   PUBLIC SITE MAIN PANEL (IIFE #1)
    - Logged-out view: tabs, sidebar links, actions
    - Renders content inside #main-panel
    ========================= */
@@ -1095,10 +1095,6 @@ bindActionsHandler();
 
 
 
-<footer class="site-footer">
-<p>© <span id="y"></span> Domigo Transit Solutions LLC — All rights reserved.</p>  <script>document.getElementById('y').textContent=new Date().getFullYear()</script> 
-</footer>
-
 <script>
 /* =========================
    AUTHENTICATED MAIN DASHBOARD PANEL (IIFE #2)
@@ -1386,5 +1382,9 @@ window.wirePanelLinks = function(root){
 
 })(); // end AUTH MAIN DASH PANEL (IIFE #2)		
 </script>
+
+<footer class="site-footer">
+<p>© <span id="y"></span> Domigo Transit Solutions LLC — All rights reserved.</p>  <script>document.getElementById('y').textContent=new Date().getFullYear()</script> 
+</footer>
 </body>
 </html>
