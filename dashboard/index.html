@@ -322,7 +322,7 @@ body.role-admin #actions .aud-municipality { display: list-item; }
 
 <body class="is-auth role-admin">
 
-  <!-- Top Banner Header -->
+<!-- Top Banner Header -->
   <div class="banner-wrap">
     <div class="banner" role="banner">
       <div class="banner-title">DOMIGO DASHBOARD</div>
@@ -332,17 +332,18 @@ body.role-admin #actions .aud-municipality { display: list-item; }
     </div>
   </div>
 
-  <!-- Body Shell -->
+<!-- Body Shell -->
   <main class="shell">
-    <!-- Left Sidebar -->
-    <aside class="sidebar" aria-label="Sidebar">
-      <div class="card">
-        <div class="brand-block" id="brand-block">
-          <div class="brand-title" id="org-name">DOMIGO</div>
-          <div class="brand-sub" id="org-sub">Transit Solutions LLC</div>
+	  
+<!-- Left Sidebar: brand top section -->
+<aside class="sidebar" aria-label="Sidebar">
+	<div class="card">
+    <div class="brand-block" id="brand-block">
+        <div class="brand-title" id="org-name">DOMIGO</div>
+        <div class="brand-sub" id="org-sub">Transit Solutions LLC</div>
         </div>
 
-<!-- Actions Links: visible only when logged IN -->
+<!-- Actions Links: midd section / visible only when logged IN -->
 <nav id="actions" class="side-widget actions auth-only" aria-label="Actions">
   <h4>Actions</h4>
   <ul class="actions-list" id="actions-list">
@@ -367,34 +368,33 @@ body.role-admin #actions .aud-municipality { display: list-item; }
     <li class="aud-municipality"><a href="#act-city"   data-action="act-city">
 	<span class="sym"></span><span>Compliance</span></a></li>
     <li class="aud-municipality"><a href="#act-data"   data-action="act-data">
-	<span class="sym"></span>span>Municipality Data</span></a></li>
+	<span class="sym"></span>Municipality Data</span></a></li>
     <li class="aud-municipality"><a href="#act-road"   data-action="act-road">
 	<span class="sym"></span><span>Roadway Events</span></a></li>
 
   </ul>
 </nav>
 
+<!-- Links: last sidebar section -->
+<nav id="sidebar" class="side-widget" aria-label="Links">
+    <h4>Links</h4>
+    <ul style="margin:0; padding-left:18px">
+ 		<li><a class="panel-link" href="#terms"   data-panel="terms">Terms &amp; Conditions</a></li>
+  		<li><a class="panel-link" href="#privacy" data-panel="privacy">Privacy Policy</a></li>
+  		<li><a class="panel-link" href="#contact" data-panel="contact">Contact</a></li>
+		</ul>
+	</nav>
+</div>
+</aside>
 
-        <nav id="sidebar" class="side-widget" aria-label="Links">
-          <h4>Links</h4>
-          <ul style="margin:0; padding-left:18px">
- <li><a class="panel-link" href="#terms"   data-panel="terms">Terms &amp; Conditions</a></li>
-  <li><a class="panel-link" href="#privacy" data-panel="privacy">Privacy Policy</a></li>
-  <li><a class="panel-link" href="#contact" data-panel="contact">Contact</a></li>
-	</ul>
-        </nav>
-      </div>
-    </aside>
-
-    <!-- Main Content Panel -->
-   <section id="main-panel" class="panel" aria-label="Main content">
-     <header role="tablist" aria-label="Sections"> 
-<a class="pill tab-link" href="#home" data-tab="home">Main</a> 
-<a class="pill tab-link is-active" href="#standards" data-tab="standards">Standards</a> 
-<a class="pill tab-link" href="#features" data-tab="features">Features</a> 
-<a class="pill tab-link" href="#pricing" data-tab="pricing">Pricing</a> 
+<!-- Main Content Panel -->
+<section id="main-panel" class="panel" aria-label="Main content">
+<header role="tablist" aria-label="Sections">  
+	<a class="pill tab-link" href="#home" data-tab="home">Main</a> 
+	<a class="pill tab-link is-active" href="#standards" data-tab="standards">Standards</a> 
+	<a class="pill tab-link" href="#features" data-tab="features">Features</a> 
+	<a class="pill tab-link" href="#pricing" data-tab="pricing">Pricing</a> 
 </header>
-
 
 
       <div class="grid">
