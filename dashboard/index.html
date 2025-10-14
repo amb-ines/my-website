@@ -1224,21 +1224,6 @@ bindActionsHandler();
     `;
   }
 
-  function getTutorialsHTML(){
-    try {
-      if (window.PANELS && PANELS.tutorials) {
-        return PANELS.tutorials
-          .replace(/<a[^>]*class="back-btn"[^>]*>.*?<\/a>\s*/i, '')
-          .replace(/<header[^>]*role="tablist"[^>]*>[\s\S]*?<\/header>/i, '');
-      }
-    } catch(_) {}
-    const alt = document.querySelector('#links-panel, #tutorials, [data-panel="tutorials"], #panel-tutorials');
-    return alt ? alt.innerHTML : `
-      <section class="contact-card">
-        <h2 style="margin-top:0">Tutorials</h2>
-        <p>Tutorial content not found. Add a tutorials panel or PANELS.tutorials.</p>
-      </section>`;
-  }
 
   function pageHTML(name){
     if (name === 'home') return appHeader('home') + `
