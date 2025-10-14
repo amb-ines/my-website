@@ -1246,8 +1246,13 @@ bindActionsHandler();
         <h2 style="margin:0 0 8px">Welcome operators and city officials to DOMIGO DASHBOARD!</h2>
         <p>This is your dashboard screen where you see news, updates and more.</p>
       </section>`;
-    if (name === 'tutorials') return appHeader('tutorials') + getTutorialsHTML();
-    if (name === 'settings') return appHeader('settings') + `
+	  
+    if (name === 'tutorials') return appHeader('tutorials') + `
+	<section class="contact-card" aria-labelledby="tutorials-title">
+ <h2 id="tutorials-title" style="margin-top:0;">Tutorials</h2>
+    </section>`;
+	  
+	if (name === 'settings') return appHeader('settings') + `
       <section class="contact-card" aria-labelledby="settings-title">
         <h2 id="settings-title" style="margin-top:0;">Account information & customization</h2>
         <form style="display:grid; gap:12px; max-width:560px;">
