@@ -314,6 +314,8 @@ body.role-admin #actions .aud-municipality { display: list-item; }
   list-style: disc;
   margin-left: 1.1em; /* align with other bullets */
 }
+  /* tiny spacing so the app tabs breathe */
+  #main-panel header[role="tablist"][data-app-tabs]{ margin-bottom: 14px; }
 
  </style>
 </head>
@@ -1088,17 +1090,19 @@ bindActionsHandler();
 <p>© <span id="y"></span> Transit Solutions LLC — All rights reserved.</p>  <script>document.getElementById('y').textContent=new Date().getFullYear()</script> 
 </footer>
 
-<style>
-  /* tiny spacing so the app tabs breathe */
-  #main-panel header[role="tablist"][data-app-tabs]{ margin-bottom: 14px; }
-</style>
-
 <script>
+/* =========================
+   MAIN DASHBOARD PANEL (IIFE #1)
+   - Handles logged-in user view, navigation tabs,
+     and page rendering for Home / Tutorials / Settings
+   ========================= */
+
 (() => {
-  // ===== Mini helpers =====
+  // ---- Mini helpers / DOM refs ----
   const panel = document.getElementById('main-panel');
   if (!panel) return;
 
+  // ---- Header (tabs) ----
   function appHeader(active){
     return `
       <header role="tablist" aria-label="App sections" data-app-tabs>
@@ -1108,29 +1112,29 @@ bindActionsHandler();
       </header>
     `;
   }
+  // ---- expose for subpage renderer
+  window.appHeader = appHeader;
 
-
+  // ---- Page templates (top-level) ----
   function pageHTML(name){
     if (name === 'home') return appHeader('home') + `
       <section class="contact-card">
         <h2 style="margin:0 0 8px">Welcome operators and city officials to the <em>DOMIGO DASHBOARD!</em></h2>
         <p>This is your dashboard screen where you see news, updates and more.</p>
       </section>`;
-	  
+
     if (name === 'tutorials') return appHeader('tutorials') + `
-	<section class="contact-card">
-  		<h2 style="margin:0 0 8px">Tutorials</h2>
-    <ul style="margin:8px 0 0; padding-left:18px">
-  <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-getting-started">Getting started</a></li>
-  <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-tickets">Managing reports &amp; tickets</a></li>
-  <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-alerts">Publishing alerts</a></li>
-  <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-analytics">Reading SLA/analytics</a></li>
-</ul>
+      <section class="contact-card">
+        <h2 style="margin:0 0 8px">Tutorials</h2>
+        <ul style="margin:8px 0 0; padding-left:18px">
+          <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-getting-started">Getting started</a></li>
+          <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-tickets">Managing reports &amp; tickets</a></li>
+          <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-alerts">Publishing alerts</a></li>
+          <li data-audience="operator,municipality"><a class="panel-link" data-panel="tutorials-analytics">Reading SLA/analytics</a></li>
+        </ul>
+      </section>`;
 
-  </section>`; 
-
-	  
-	if (name === 'settings') return appHeader('settings') + `
+    if (name === 'settings') return appHeader('settings') + `
       <section class="contact-card" aria-labelledby="settings-title">
         <h2 id="settings-title" style="margin-top:0;">Account information & customization</h2>
         <form style="display:grid; gap:12px; max-width:560px;">
@@ -1151,9 +1155,11 @@ bindActionsHandler();
           <div><button type="submit" class="px-btn">Save changes</button></div>
         </form>
       </section>`;
+
     return '';
   }
 
+  // ---- Render & wire top-level page ----
   function renderApp(name='home', push=true){
     panel.innerHTML = pageHTML(name);
     try { window.wirePanelLinks && wirePanelLinks(panel); } catch(_){}
@@ -1161,8 +1167,9 @@ bindActionsHandler();
     try { window.focusPanel && focusPanel(); } catch(_){}
     if (push) history.pushState({ route:'app', name }, '', `#app-${name}`);
   }
-  window.renderApp = renderApp; // optional for debugging
+  window.renderApp = renderApp; // debug entry
 
+  // ---- Auth check (for landing on app) ----
   function isLoggedIn(){
     const b = document.body;
     return !!window.currentUser ||
@@ -1173,7 +1180,7 @@ bindActionsHandler();
            b.getAttribute('data-auth') === 'on';
   }
 
-  // clicks on the App tabs
+  // ---- Tab clicks (Home/Tutorials/Settings) ----
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-app]');
     if (!a) return;
@@ -1182,27 +1189,47 @@ bindActionsHandler();
     renderApp(a.getAttribute('data-app'), true);
   });
 
-  // back/forward support
+  // ---- Back/forward for top-level routes ----
   window.addEventListener('popstate', () => {
     const h = (location.hash || '#').slice(1);
+    // Support deep link: #app-tutorials:subkey
+    if (h.startsWith('app-tutorials:')) {
+      renderApp('tutorials', false);
+      const sub = h.split(':')[1];
+      if (sub && window.PANELS && window.PANELS[sub]) {
+        panel.innerHTML = window.appHeader('tutorials') + window.PANELS[sub];
+      }
+      return;
+    }
     if (h.startsWith('app-')) renderApp(h.replace('app-',''), false);
   });
 
-  // also render if URL already points to an app page
+  // ---- Initial load (respect hash) ----
   const hash = (location.hash || '#').slice(1);
+  if (hash.startsWith('app-tutorials:')) {
+    renderApp('tutorials', false);
+    const sub = hash.split(':')[1];
+    if (sub && window.PANELS && window.PANELS[sub]) {
+      panel.innerHTML = window.appHeader('tutorials') + window.PANELS[sub];
+    }
+    return;
+  }
   if (hash.startsWith('app-')) {
     renderApp(hash.replace('app-',''), false);
     return;
   }
 
-  // force App Home if your body has is-auth/role-client etc.
+  // ---- Default: land on App Home if logged in ----
   if (isLoggedIn()) {
     renderApp('home', true);
   }
 })();
 
+/* =========================
+   HOME PATCHES (IIFE #2)
+   - Ensure Home routes to App when logged-in
+   ========================= */
 (function(){
-  // Helper: are we logged in?
   function isLoggedIn(){
     try {
       return !!(window.currentUser) ||
@@ -1211,7 +1238,7 @@ bindActionsHandler();
     } catch(_) { return false; }
   }
 
-  // 1) Make "Home" go to App Home when logged in
+  // Make "site Home" route to App Home if logged in
   const prevRenderHome = window.renderHome;
   window.renderHome = function patchedRenderHome(push){
     if (isLoggedIn() && typeof window.renderApp === 'function') {
@@ -1220,17 +1247,17 @@ bindActionsHandler();
     if (typeof prevRenderHome === 'function') return prevRenderHome(push);
   };
 
-  // 2) Intercept clicks on any "Back" or Home tab when logged in
+  // Intercept Back/Home tab to App Home when logged-in
   document.addEventListener('click', function(e){
     const back = e.target.closest('.back-btn, a.tab-link[data-tab="home"]');
     if (!back) return;
-    if (!isLoggedIn()) return; // let original handlers run when logged-out
+    if (!isLoggedIn()) return;
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
     if (typeof window.renderApp === 'function') window.renderApp('home', true);
-  }, true); // capture so we run before default handlers
+  }, true);
 
-  // 3) Make browser Back/Forward land on App Home when logged in
+  // Browser back/forward to App Home
   window.addEventListener('popstate', function(){
     const hash = (location.hash || '#').slice(1);
     if (hash === '' || hash === 'home'){
@@ -1240,7 +1267,7 @@ bindActionsHandler();
     }
   });
 
-  // 4) On first load, if already logged in, show App Home
+  // First load: if logged-in, show App Home
   if (isLoggedIn() && typeof window.renderApp === 'function') {
     const hash = (location.hash || '#').slice(1);
     if (hash === '' || hash === 'home') {
@@ -1248,6 +1275,106 @@ bindActionsHandler();
     }
   }
 })();
+
+/* =========================
+   TUTORIAL SUBPAGES
+   - Panel templates + click wiring
+   ========================= */
+
+ // ---- Subpage templates ----
+window.PANELS = {
+  'tutorials-getting-started': `
+    <section class="contact-card" aria-labelledby="tut-gs-title">
+      <a href="#" class="back-btn" data-panel="tutorials" aria-label="Back to Tutorials">← Back to Tutorials</a>
+      <h2 id="tut-gs-title" style="margin-top:0;">Getting started</h2>
+      <div class="video-grid">
+        <article class="video-card" data-audience="municipality">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_1" title="City workspace setup" allowfullscreen></iframe></div>
+          <p class="video-caption">Set up your city workspace: add staff & roles.</p>
+        </article>
+        <article class="video-card" data-audience="municipality">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_2" title="City dashboard overview" allowfullscreen></iframe></div>
+          <p class="video-caption">Dashboard tour: KPIs, tickets, escalations.</p>
+        </article>
+        <article class="video-card" data-audience="operator">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_3" title="Operator onboarding" allowfullscreen></iframe></div>
+          <p class="video-caption">Invite your team and connect routes.</p>
+        </article>
+        <article class="video-card" data-audience="operator">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_4" title="Operator dashboard overview" allowfullscreen></iframe></div>
+          <p class="video-caption">Tickets, alerts, and analytics in one place.</p>
+        </article>
+      </div>
+    </section>
+  `,
+  'tutorials-tickets': `
+    <section class="contact-card" aria-labelledby="tut-tk-title">
+      <a href="#" class="back-btn" data-panel="tutorials" aria-label="Back to Tutorials">← Back to Tutorials</a>
+      <h2 id="tut-tk-title" style="margin-top:0;">Managing reports &amp; tickets</h2>
+      <div class="video-grid">
+        <article class="video-card" data-audience="municipality">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_5" title="Escalation paths" allowfullscreen></iframe></div>
+          <p class="video-caption">Escalate unresolved tickets across operators.</p>
+        </article>
+        <article class="video-card" data-audience="operator">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_6" title="Triage & dedupe" allowfullscreen></iframe></div>
+          <p class="video-caption">Triage, dedupe, and close the loop with riders.</p>
+        </article>
+      </div>
+    </section>
+  `,
+  'tutorials-alerts': `
+    <section class="contact-card" aria-labelledby="tut-al-title">
+      <a href="#" class="back-btn" data-panel="tutorials" aria-label="Back to Tutorials">← Back to Tutorials</a>
+      <h2 id="tut-al-title" style="margin-top:0;">Publishing alerts</h2>
+      <div class="video-grid">
+        <article class="video-card" data-audience="operator,municipality">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_7" title="Create a detour alert" allowfullscreen></iframe></div>
+          <p class="video-caption">Create & schedule detour/service change alerts.</p>
+        </article>
+      </div>
+    </section>
+  `,
+  'tutorials-analytics': `
+    <section class="contact-card" aria-labelledby="tut-an-title">
+      <a href="#" class="back-btn" data-panel="tutorials" aria-label="Back to Tutorials">← Back to Tutorials</a>
+      <h2 id="tut-an-title" style="margin-top:0;">Reading SLA/analytics</h2>
+      <div class="video-grid">
+        <article class="video-card" data-audience="municipality">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_8" title="City SLA dashboard" allowfullscreen></iframe></div>
+          <p class="video-caption">Understand SLA targets & monthly exports.</p>
+        </article>
+        <article class="video-card" data-audience="operator">
+          <div class="video-box"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID_9" title="Operator KPIs" allowfullscreen></iframe></div>
+          <p class="video-caption">Hotspots, trends, and team performance.</p>
+        </article>
+      </div>
+    </section>
+  `
+};
+
+ // ---- Wire clicks for Tutorials list & back links ----
+window.wirePanelLinks = function(root){
+  root.addEventListener('click', function(e){
+    const a = e.target.closest('a.panel-link, a.back-btn');
+    if (!a) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+
+    const main = document.getElementById('main-panel');
+    const key  = a.dataset.panel; // e.g. "tutorials-getting-started"
+
+    if (key && window.PANELS[key]) {
+      // show subpage
+      main.innerHTML = window.appHeader('tutorials') + window.PANELS[key];
+      history.pushState({route:'app', name:'tutorials', sub:key}, '', `#app-tutorials:${key}`);
+    } else {
+      // back to Tutorials index
+      if (typeof window.renderApp === 'function') window.renderApp('tutorials', true);
+    }
+  });
+};
+
 </script>
 </body>
 </html>
