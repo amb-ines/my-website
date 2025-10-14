@@ -442,7 +442,7 @@ body.role-admin #actions .aud-municipality { display: list-item; }
    - Logged-out view: tabs, sidebar links, actions
    - Renders content inside #main-panel
    ========================= */
-(() => {
+
 	
 /* ===== DOM handles ===== */
 const panel = document.getElementById('main-panel');
@@ -1090,19 +1090,18 @@ renderSidebarForUser(currentUser);
 // arm Actions click handler
 bindActionsHandler();
 
-})(); // end PUBLIC SITE MAIN PANEL (IIFE #1)	
 </script>
 
 
 
 <script>
 /* =========================
-   AUTHENTICATED MAIN DASHBOARD PANEL (IIFE #2)
+   AUTHENTICATED MAIN PANEL (IIFE #2)
    - Handles logged-in user view, navigation tabs,
      and page rendering for Home / Tutorials / Settings
    ========================= */
-(() => {
-	
+
+(() => {	
   // ---- Mini helpers / DOM refs ----
   const panel = document.getElementById('main-panel');
   if (!panel) return;
@@ -1380,7 +1379,7 @@ window.wirePanelLinks = function(root){
   });
 };
 
-})(); // end AUTH MAIN DASH PANEL (IIFE #2)		
+	
 </script>
 
 	
