@@ -11,125 +11,143 @@
 
   <title>Novedades de DOMiGO</title>
   <style>
-    /* Base */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      color: #333;
-    }
-
-    header {
-      background-color: #00cfc1;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    section {
-      padding: 1rem;
-    }
-
-    /* Cards */
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card small {
-      color: gray;
-    }
-
-    a {
-      color: #00cfc1;
-      text-decoration: none;
-    }
-
-    .button {
-      display: inline-block;
-      background: #22b5b3;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      margin-top: 0.5rem;
-    }
-
-   /* Highlight quote */ 
-.highlight-quote {
-  text-align: center;
-  margin: 40px auto 20px auto;
-  max-width: 700px;               /* narrower for a cleaner block */
-  font-family: 'Dancing Script', cursive; 
-  font-size: 1.1rem;              /* smaller for neat fit */
-  line-height: 1.6;
-  color: #009688; /* DOMiGO teal */
+   :root{
+  --teal:#00cfc1;
+  --teal-600:#009688;
+  --teal-700:#00695c;
+  --ink:#333;
+  --ink-muted:#666;
+  --bg:#f7f7f7;
+  --card:#fff;
+  --shadow:0 2px 5px rgba(0,0,0,.1);
 }
 
-.highlight-quote p {
-  margin: 0;
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin:0; padding:0;
+  background:var(--bg);
+  color:var(--ink);
 }
 
-.highlight-quote .signature {
-  display: block;
-  margin-top: 6px;
-  font-size: 1.2rem;              /* just slightly larger for emphasis */
-  color: #00695c;                 /* darker teal */
+header{
+  background-color:var(--teal);
+  color:#fff; text-align:center; padding:1rem;
 }
 
-    /* Footer */
-    .site-footer {
-      background: #f7f7f7;
-      color: #000; 
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 14px;
-    }
+h1{ margin:0; font-size:1.5rem; }
+section{ padding:1rem; }
 
-    .site-footer .social-links {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+a{ color:var(--teal); text-decoration:none; }
+a:hover{text-decoration:underline;}
+a:focus-visible{ outline:3px solid rgba(0,0,0,.25); outline-offset:2px; border-radius:6px; }
 
-    .site-footer .social-links a {
-      font-size: 22px;
-      color: #bbb; /* Default icon color */
-      transition: color 0.3s ease;
-    }
+/* Cards */
+.card{
+  background:var(--card);
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  padding:1rem;
+  margin-bottom:1rem;
+}
+.card h2{ font-size:1.1rem; margin:0 0 .5rem; }
+.card small{ color:var(--ink-muted); display:inline-block; margin:.25rem 0 .5rem; }
 
-    .site-footer .social-links a:hover {
-      color: #00bcd4; /* Highlight color on hover */
-    }
+/* Buttons */
+.button{
+  display:inline-block; background:#22b5b3; color:#fff;
+  padding:.5rem 1rem; border-radius:6px; margin-top:.5rem;
+  transition: transform .06s ease-in;
+}
+.button:hover{ filter:brightness(1.05); }
+.button:active{ transform:translateY(1px); }
+.button:focus-visible{ outline:3px solid #8ee; outline-offset:2px; }
 
-    .visitor-counter {
-      margin-top: 15px;
-    }
+/* Highlight quote */
+.highlight-quote{
+  text-align:center; margin:40px auto 20px; max-width:700px;
+  font-family:'Dancing Script', cursive; 
+  font-size:1.1rem; line-height:1.6; color:var(--teal-600);
+}
+.highlight-quote p{ margin:0; }
+.highlight-quote .signature{
+  display:block; margin-top:6px; font-size:1.2rem; color:var(--teal-700);
+}
 
-    .visitor-counter p {
-      margin: 5px 0;
-    }
+/* Footer */
+.site-footer{
+  background:var(--bg); color:#000; text-align:center;
+  padding:20px 10px; font-size:14px;
+}
+.site-footer .social-links{
+  margin-top:10px; display:flex; justify-content:center; gap:20px;
+}
+.site-footer .social-links a{
+  font-size:22px; color:#888; transition:color .2s ease;
+}
+.site-footer .social-links a:hover{ color:#00bcd4; }
+.visitor-counter{ margin-top:15px; }
+.visitor-counter p{ margin:5px 0; }
 
-    /* Responsive */
-    @media screen and (max-width: 600px) {
-      .card, section {
-        padding: 0.75rem;
-      }
-    }
+/* Primera vista*/
+#primera-vista .card{
+  padding:1rem; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.thumb-row{
+  display:flex; gap:.75rem; overflow-x:auto; padding:.25rem;
+  scroll-snap-type:x proximity;
+}
+.thumb-row::-webkit-scrollbar{ height:8px; }
+.thumb-row::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.15); border-radius:8px; }
+
+.thumb{
+  display:block; border-radius:10px; overflow:hidden; flex:0 0 auto;
+  scroll-snap-align:start;
+}
+.thumb img{
+  display:block;
+  height:clamp(96px, 12vw, 120px);
+  aspect-ratio:16/9;
+  width:auto;
+  object-fit:cover;
+  transition:transform .2s ease;
+}
+.thumb:hover img{ transform:scale(1.03); }
+.thumb:focus-visible{ outline:3px solid #55a; outline-offset:2px; }
+
+/* Lightbox */
+.lightbox{
+  position:fixed; inset:0; background:rgba(0,0,0,.85);
+  display:none; place-items:center; z-index:9999;
+}
+.lightbox.open{ display:grid; }
+.lightbox figure{
+  margin:0; max-width:92vw; max-height:88vh; display:grid; gap:.5rem;
+}
+#lightbox-img{
+  max-width:92vw; max-height:80vh; border-radius:12px;
+  box-shadow:0 8px 30px rgba(0,0,0,.45);
+}
+#lightbox-cap{ text-align:center; color:#eee; font-size:.95rem; opacity:.9; }
+.lightbox .close{
+  position:absolute; top:12px; right:16px; font-size:32px; line-height:1;
+  background:transparent; color:#fff; border:0; cursor:pointer;
+}
+.lightbox .close:focus-visible{ outline:3px solid #fff; outline-offset:2px; }
+
+/* Responsive */
+@media (max-width: 600px){
+  section, .card{ padding:.75rem; }
+  header{ padding:.75rem; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
   </style>
 </head>
 <body>
@@ -185,6 +203,26 @@
 
 <section id="primera-vista">
     <h2>📸 Primera Vista</h2>
+      <div class="card">
+    <div class="thumb-row" role="list">
+      <a class="thumb" role="listitem" href="/assets/peek-1.jpg" data-full="/assets/peek-1.jpg">
+        <img src="/assets/peek-1_600.jpg" alt="Pantalla de inicio (WIP)" loading="lazy">
+      </a>
+
+      <a class="thumb" role="listitem" href="/assets/peek-2.jpg" data-full="/assets/peek-2.jpg">
+        <img src="/assets/peek-2_600.jpg" alt="Formulario de reporte (WIP)" loading="lazy">
+      </a>
+    </div>
+  </div>
+
+  <!-- lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" aria-modal="true" role="dialog">
+    <button class="close" aria-label="Cerrar (Esc)">&times;</button>
+    <figure>
+      <img id="lightbox-img" alt="">
+      <figcaption id="lightbox-cap"></figcaption>
+    </figure>
+  </div>
 </section>
 
     <!-- Highlight Quote -->
