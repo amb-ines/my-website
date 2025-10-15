@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DOMiGO Dashboard</title>
+  <title>DOMIGO DASHBOARD</title>
   <style>
 /* =========================================================
    THEME TOKENS
@@ -289,10 +289,12 @@ button.px-btn {
   margin: 0 auto;            
   max-width: 900px;         
   padding: 20px 0;           
+  align-items: start;      
+  grid-auto-rows: 1fr;      
 }
 	  
 @media (min-width:820px){
-  .feature-grid{ grid-template-columns: repeat(2, 1fr); }
+  .feature-grid{ grid-template-columns: repeat(2, minmax(300px, 1fr)); }
 }
 	  
 .feature-card{
