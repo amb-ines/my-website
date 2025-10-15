@@ -281,8 +281,20 @@ button.px-btn {
 .price-table td strong{ font-weight:900; }
 .price-note{ margin:14px 0 0; opacity:.85; }
 
-.feature-grid{ display:grid; gap:14px; grid-template-columns:1fr; }
-@media (min-width:820px){ .feature-grid{ grid-template-columns: repeat(3, 1fr); } }
+.feature-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+  justify-content: center;   
+  margin: 0 auto;            
+  max-width: 900px;         
+  padding: 20px 0;           
+}
+	  
+@media (min-width:820px){
+  .feature-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+	  
 .feature-card{
   background:var(--paper);
   border:4px solid var(--panel-dark);
