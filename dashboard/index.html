@@ -322,7 +322,7 @@ button.px-btn {
 .feature-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   background:var(--paper);
   border:4px solid var(--panel-dark);
   border-radius:18px;
@@ -330,7 +330,7 @@ button.px-btn {
   box-shadow:none !important;
 }
 .feature-card h3{ margin:0 0 8px; }
-.feature-card p{ margin:0; line-height:1.45; }
+.feature-card p{ flex-grow: 1; }
 
 /* =========================================================
    AUTH GATING (hide/show blocks when logged in)
